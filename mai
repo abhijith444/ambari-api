@@ -1,0 +1,15 @@
+# Turn on maintenance for a component
+# Usage ./script.sh host_fqdn_list
+# $1 is a list of host fqdns
+
+# Region Server
+while read host
+do
+curl -u admin:'ambari_password' -H "X-Requested-By:ambari"-i -X PUT -d '{"RequestInfo":{"context":"Turn ON Maintenance Mode For RegionServer"}, "Body":{"HostRoles":{"maintenance_state":"ON"}}}' http://ambari:8080/api/v1/clusters/bigRED/hosts/brdn1571.cluster.com/host_components/HBASE_REGIONSERVER;
+done<$1
+
+# Nodemanager
+while read host
+do
+curl -u admin:'ambari_password' -H "X-Requested-By:ambari"-i -X PUT -d '{"RequestInfo":{"context":"Turn ON Maintenance Mode For RegionServer"}, "Body":{"HostRoles":{"maintenance_state":"ON"}}}' http://ambari:8080/api/v1/clusters/bigRED/hosts/brdn1571.cluster.com/host_components/NODEMANAGER;
+done<$1
